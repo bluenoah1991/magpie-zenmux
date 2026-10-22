@@ -13,7 +13,10 @@ export function getInferenceKey(auth, plan) {
   if (
     auth?.type !== 'api' || !plan.keyPrefixes.some((prefix) => !validateApiKey(auth.key, prefix))
   ) {
-    throw Object.assign(new Error(`Sign in with a ${plan.name} API key`), { signIn: 'expired' });
+    throw Object.assign(
+      new Error(`Expected a ${plan.name} API key starting with ${plan.keyPrefixes.join(' or ')}`),
+      { signIn: 'expired' },
+    );
   }
   return auth.key.trim();
 }

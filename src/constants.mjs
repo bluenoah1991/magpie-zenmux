@@ -18,7 +18,7 @@ export const BILLING_PLANS = Object.freeze({
   builder: Object.freeze({
     id: 'zenmux-builder',
     name: 'ZenMux Builder Plan',
-    keyPrefixes: Object.freeze(['sk-ss-v1-']),
+    keyPrefixes: Object.freeze(['sk-subs-', 'sk-ss-v1-']),
     usageEndpoint: 'management/subscription/detail',
     usageLabel: 'quota',
     maxConcurrency: 2,
