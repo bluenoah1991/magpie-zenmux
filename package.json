@@ -1,6 +1,6 @@
 {
   "name": "magpie-zenmux",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "ZenMux Builder Plan and Pay As You Go provider plugin for Magpie",
   "keywords": [
     "magpie",

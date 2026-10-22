@@ -48,8 +48,9 @@ function mapSubscriptionUsage(data) {
   ) {
     throw new Error('ZenMux subscription response is incomplete');
   }
+  const tier = data.plan.tier.trim();
   const result = {
-    plan: `Builder ${data.plan.tier}`,
+    plan: `Builder ${tier[0].toUpperCase()}${tier.slice(1)}`,
     windows: QUOTA_WINDOWS.map((definition) => mapQuotaWindow(data[definition.field], definition)),
     signIn: 'kept',
     ...(validTimestamp(data.plan.expires_at) ? { until: data.plan.expires_at } : {}),
@@ -59,7 +60,7 @@ function mapSubscriptionUsage(data) {
     result.resets = { count: resets, ...(result.until ? { until: result.until } : {}) };
   }
   if (isNonnegativeNumber(data.quota_monthly?.max_flows)) {
-    result.balance = `Monthly cap: ${data.quota_monthly.max_flows} Flows`;
+    result.balance = `${data.quota_monthly.max_flows} Flows`;
   }
   if (typeof data.account_status === 'string' && data.account_status !== 'healthy') {
     result.error = 'ZenMux account is not healthy; check its status in the ZenMux console';
