@@ -1,0 +1,18 @@
+{
+  "lineWidth": 100,
+  "indentWidth": 2,
+  "typescript": {
+    "quoteStyle": "preferSingle",
+    "semiColons": "always"
+  },
+  "excludes": [
+    "**/node_modules/**",
+    "**/package-lock.json",
+    ".local/**"
+  ],
+  "plugins": [
+    "./node_modules/@dprint/typescript/plugin.wasm",
+    "./node_modules/@dprint/json/plugin.wasm",
+    "./node_modules/@dprint/markdown/plugin.wasm"
+  ]
+}

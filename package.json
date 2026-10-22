@@ -1,0 +1,49 @@
+{
+  "name": "magpie-zenmux",
+  "version": "0.2.0",
+  "description": "ZenMux Builder Plan and Pay As You Go provider plugin for Magpie",
+  "keywords": [
+    "magpie",
+    "opencode",
+    "opencode-plugin",
+    "zenmux",
+    "provider"
+  ],
+  "homepage": "https://github.com/bluenoah1991/magpie-zenmux",
+  "bugs": "https://github.com/bluenoah1991/magpie-zenmux/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bluenoah1991/magpie-zenmux.git"
+  },
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": "./index.mjs"
+  },
+  "main": "./index.mjs",
+  "files": [
+    "index.mjs",
+    "src",
+    "assets",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "check": "npm run format:check && node scripts/check.mjs",
+    "format": "dprint fmt",
+    "format:check": "dprint check",
+    "prepack": "node scripts/sync-icon.mjs"
+  },
+  "devDependencies": {
+    "@dprint/json": "0.25.2",
+    "@dprint/markdown": "0.27.1",
+    "@dprint/typescript": "0.96.1",
+    "dprint": "0.64.1"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "magpie": {
+    "icon": "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTYwIiBoZWlnaHQ9IjE2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBmaWxsPSJub25lIj48cGF0aCBmaWxsPSIjMDAwIiBkPSJNNzcuNzc2LjQyMWM4LjI1LS4zMTcgMjQuOTQ3Ljc3NSAzOC4zMDQgMTIuNzY4IDEwLjk1NyA5LjgzOSAxNC43MzMgMjguMDc4IDEyLjE4IDQyLjIyMS0yLjM0MSAxMi45NjUtNy44NTggMjMuNTcyLTUuNjk2IDMzLjM5NCAyLjE2IDkuODIxIDcuNjU4IDE0LjY2MyAxMi4zMzQgMTYuNjk2IDQuNTE5IDEuOTY1IDguODg2IDEuMzc1IDguMDU1IDUuMTA4LS44MzIgMy43MzItNi40ODIgNS4xMDctMTAuNjA4IDUuMTA3LTIuMjYyIDAtOS4xMDMtLjU5LTEyLjEzOS0yLjU1NC0zLjU4Ny0yLjMyMi00LjM4Ni00LjQwMi01Ljc1Mi02LjA3NC0uMjMxLS4yODQtLjY0LS4wODctLjU4Ni4yNzYuNjIyIDQuMTEzIDIuMzM4IDExLjA5NCA1LjEyIDE1LjQyMyAyLjI1MiAzLjUwMyAzLjE4MyA2LjA1OCA4LjM0MSAxMC4zOCA1LjE2IDQuMzIgNy41NyA4LjI0OSAyLjU1MyAxMS4wMzEtNC40NTYgMi40NzEtMTQuMTQyLTIuNTg1LTE5LjgzOS04LjgzOS01LjEyNy01LjYyOS04LjY5Ny0xMi41NzItMTAuMTA4LTE3LjA5LS43NTUtMi40MTUtMS41MTEtNi41Ny0yLjI2Ni05Ljk2OS0uMS0uNDQ2LS43MTEtLjM3NC0uNzI1LjA4NC0uMjUgOC42NDktMS42MSAxNi45MDktMy41OTggMjUuNzY0LTEuNDMgNi4zNzUtNC45MSAxNC4xNDMtOC4wNTMgMTguODU3LTMuODMzIDUuNzQ5LTkuNTIyIDcuNTQzLTEzLjc1IDUuOTcxLTMuMzgyLTEuMjU3LS45ODMtNS41MzEgMC05LjIzMi45ODItMy43IDIuOTQ3LTExLjQzOSA0LjI3LTE5LjkxOCAxLjE5Ny03LjY3NCAxLjUxNC0xNS4yNzEuOTgxLTIyLjQ3LS4wMzMtLjQzOS0uNzA4LS41MDYtLjg0NC0uMDg3LTEuMTAyIDMuMzc2LTMuMTggOC45NzItNC42OTYgMTIuMzc2LTMuMTYyIDcuMDk5LTUuNTAxIDEwLjIxNC0xMS45ODMgMTcuNjc3LTUuODMgNi43MTQtMjIuNTk3IDE2LjIwNy0yNC43NSA2Ljg3Ni0uNTktMi41NTMgMi40OTgtMy42NzEgNS4zNDUtNS44OTMgNC4yOC0zLjMzOSA3Ljg1Ny05LjI2NCAxMS4yNDgtMTYuNSAzLjA0NS02LjQ5NyA0LjU5Mi0xMi43ODIgNC44My0xNi43OTQuMDIyLS4zODctLjQ2NC0uNTMzLS42ODItLjIxMy0xLjQxIDIuMDY3LTMuNDg1IDQuODY1LTUuNzcxIDcuMTg1LTMuODE5IDMuODc3LTguMDU0IDcuODY3LTEyLjk2NiA5LjgyMi03Ljg5NyAzLjE0My0xNS45NS45ODItMTUuMzYxLTQuNzE0LjQ5Mi00Ljc1OCA1LjgwNC0zLjc3MyAxMi40MTYtMTAuOTg3IDYuNDgyLTcuMDcyIDguNjQzLTEyLjU3MyA5LjAzNS0xOC42NjIuMzE0LTQuODcyLTQuNDUxLTE2LjQzNC02Ljg3NC0yMS42MDctMy44NjMtOC4yNS02LjcxOC0zMS42NjUgNC45MS00Ni43NUM1NS4xODguMjI2IDcyLjY3LjYxNyA3Ny43NzcuNDJ6TTU1LjEwMSAzMy4zOTdjLTUuNDA4IDAtOC4xMTIgNC4xNTEtOC4xMTIgOS4yNzIgMCA1LjEyIDMuMDA0IDkuMjcxIDguMTEyIDkuMjcxIDUuMTA4IDAgOC4xMTMtNC4xNSA4LjExMy05LjI3MSAwLTUuMTItMi43MDUtOS4yNzItOC4xMTMtOS4yNzJ6bTQ0LjA0IDBjLTUuNDA4IDAtOC4xMTIgNC4xNTEtOC4xMTMgOS4yNzIgMCA1LjEyIDMuMDA1IDkuMjcxIDguMTEzIDkuMjcxczguMTEzLTQuMTUgOC4xMTMtOS4yNzFjMC01LjEyLTIuNzA1LTkuMjcyLTguMTEzLTkuMjcyeiIgY2xpcC1ydWxlPSJldmVub2RkIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiLz48L3N2Zz4="
+  }
+}
