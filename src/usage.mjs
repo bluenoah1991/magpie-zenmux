@@ -1,6 +1,6 @@
 import { fetchMetadata } from './api-client.mjs';
 import { getInferenceKey, validateApiKey } from './authentication.mjs';
-import { MANAGEMENT_KEY_PREFIX } from './constants.mjs';
+import { BILLING_PLANS, MANAGEMENT_KEY_PREFIX, MANAGEMENT_PROVIDER_NAME } from './constants.mjs';
 import { isRecord } from './validation.mjs';
 
 const QUOTA_WINDOWS = [
@@ -93,21 +93,64 @@ export async function getAccountUsage(plan, getAuth) {
     managementKey === undefined || managementKey === null
     || (typeof managementKey === 'string' && managementKey.trim() === '')
   ) {
-    return {
-      ...status,
-      error:
-        `Add a management API key to view ${plan.usageLabel}. This key is not required for inference.`,
-    };
+    return status;
   }
   if (validateApiKey(managementKey, MANAGEMENT_KEY_PREFIX)) {
     return { ...status, error: 'Invalid management API key format' };
   }
   try {
-    const response = await fetchMetadata(plan.usageEndpoint, managementKey);
-    return plan.id === 'zenmux-builder'
-      ? mapSubscriptionUsage(response.data)
-      : mapPaygUsage(response.data);
+    return await getPlanUsage(plan, managementKey);
   } catch (error) {
     return { ...status, error: error.message };
   }
+}
+
+async function getPlanUsage(plan, managementKey) {
+  const response = await fetchMetadata(plan.usageEndpoint, managementKey);
+  return plan.id === BILLING_PLANS.builder.id
+    ? mapSubscriptionUsage(response.data)
+    : mapPaygUsage(response.data);
+}
+
+export async function getManagementUsage(getAuth) {
+  const auth = await getAuth();
+  const status = { plan: MANAGEMENT_PROVIDER_NAME, signIn: 'kept' };
+  if (auth?.type !== 'api' || validateApiKey(auth.key, MANAGEMENT_KEY_PREFIX)) {
+    return {
+      ...status,
+      error: `Expected a Management API key starting with ${MANAGEMENT_KEY_PREFIX}`,
+    };
+  }
+  const plans = Object.values(BILLING_PLANS);
+  const results = await Promise.allSettled(plans.map((plan) => getPlanUsage(plan, auth.key)));
+  if (results.every((result) => result.status === 'rejected')) {
+    return {
+      ...status,
+      error: results.map((result, index) => `${plans[index].name}: ${result.reason.message}`).join(
+        '; ',
+      ),
+    };
+  }
+  const usage = { ...status, windows: [] };
+  for (const [index, result] of results.entries()) {
+    if (result.status === 'rejected') {
+      usage.windows.push({ name: plans[index].name, display: result.reason.message, aside: true });
+      continue;
+    }
+    const data = result.value;
+    if (plans[index].id === BILLING_PLANS.builder.id) {
+      Object.assign(usage, data);
+      if (data.balance) {
+        usage.windows.push({
+          name: 'Builder monthly allowance',
+          display: data.balance,
+          aside: true,
+        });
+      }
+      delete usage.balance;
+    } else {
+      usage.balance = `PAYG ${data.balance}`;
+    }
+  }
+  return usage;
 }
