@@ -4,11 +4,11 @@ Use [ZenMux](https://zenmux.ai) Builder Plan or Pay As You Go in Magpie, with st
 
 ## Get started
 
-1. On Magpie's Plugins page, choose **Builder Plan API key** or **PAYG API key** and enter the key for that plan.
+1. On Magpie's Plugins page, sign in to **ZenMux Builder Plan** or **ZenMux Pay As You Go** with the API key for that plan.
 2. Enable subscription account discovery in Magpie so your agents can use plugin models.
 3. Select a ZenMux model on the Agents page and start a new agent session.
 
-To view usage, choose the separate **Management API key (quota and balance only)** button under **ZenMux Management** and enter an `sk-mgmt-` key. This account reports Builder Plan quota and PAYG balance; it does not provide models. Management keys previously saved with a plan account continue to report usage on that account.
+Add an optional **management API key** from the same ZenMux account to view subscription quota or PAYG balance in Magpie.
 
 ## Availability
 
