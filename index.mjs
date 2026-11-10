@@ -1,4 +1,6 @@
-import { createZenMuxPlugin } from './src/plugin.mjs';
+import { createManagementPlugin, createZenMuxPlugin } from './src/plugin.mjs';
+
+export const ZenMuxManagementPlugin = async () => createManagementPlugin();
 
 export const ZenMuxBuilderPlugin = async (_input, options) =>
   createZenMuxPlugin('builder', options);
