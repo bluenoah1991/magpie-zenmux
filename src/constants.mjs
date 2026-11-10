@@ -3,8 +3,6 @@ export const ANTHROPIC_BASE_URL = 'https://zenmux.ai/api/anthropic/v1';
 export const GEMINI_BASE_URL = 'https://zenmux.ai/api/vertex-ai/v1';
 export const MODEL_DETAILS_URL = 'https://zenmux.ai/api/frontend/model/available/list';
 export const MODEL_CAPABILITIES_URL = 'https://models.dev/api.json';
-export const MANAGEMENT_PROVIDER_ID = 'zenmux-management';
-export const MANAGEMENT_PROVIDER_NAME = 'ZenMux Management';
 export const MANAGEMENT_KEY_PREFIX = 'sk-mgmt-';
 export const METADATA_TIMEOUT_MS = 15_000;
 export const MODEL_CATALOG_TTL_MS = 300_000;
@@ -22,6 +20,7 @@ export const BILLING_PLANS = Object.freeze({
     name: 'ZenMux Builder Plan',
     keyPrefixes: Object.freeze(['sk-subs-', 'sk-ss-v1-']),
     usageEndpoint: 'management/subscription/detail',
+    usageLabel: 'quota',
     maxConcurrency: 2,
   }),
   payg: Object.freeze({
@@ -29,5 +28,6 @@ export const BILLING_PLANS = Object.freeze({
     name: 'ZenMux Pay As You Go',
     keyPrefixes: Object.freeze(['sk-payg-', 'sk-ai-v1-']),
     usageEndpoint: 'management/payg/balance',
+    usageLabel: 'balance',
   }),
 });
